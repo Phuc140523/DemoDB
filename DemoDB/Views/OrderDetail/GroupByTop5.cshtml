@@ -1,0 +1,29 @@
+﻿@model IEnumerable< DemoDB.Models.ViewModel>
+
+@{
+    ViewBag.Title = "GroupByTop5";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>top 5 san pham ban chay nhat</h2>
+<table class="table-bordered">
+    <tr>
+        <th> Ma san pham</th>
+        <th> Ten san pham</th>
+        <th> Hinh san pham</th>
+        <th> gia</th>
+        <th> tong so luong</th>
+    </tr>
+    @foreach(var i in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(Model=>i.IDpro)</td>
+                    <td>@Html.DisplayFor(Model=>i.NamePro)</td>
+                    <td><img src="@Url.Content(i.ImgPro)" height="150px" width="150px" /></td>
+                    <td>@Html.DisplayFor(model=>i.pricePro)</td>
+                    <td>@Html.DisplayFor(model=>i.Sum_Quantity)</td>
+                    <td><a href="/ShopingCart/AddToCart/@i.IDpro" class=" btn btn-default"> Buy</a></td>
+                </tr>
+            }
+</table>
+

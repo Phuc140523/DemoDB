@@ -1,0 +1,104 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/script.js"></script>
+    <style>
+        #div-footer{
+            position:fixed;
+            text-align:center;
+            bottom:0;
+            left:0;
+
+            padding-top:15px;
+            height:50px;
+            width:100%;
+            background-color:aquamarine;
+        }
+        li.format-hello{
+            padding-top:15px;
+            color:white;
+        }
+        #animation-top5{
+            color:white;
+            text-shadow:1px 1px 2px gray,0 0 25px red,0 0 5px red;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Product", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Product")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        
+                        <a href="/ShopingCart/ShowCart">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            @Html.ActionLink("BagCart","ShopingCart")
+                        </a>
+                       
+                    </li>
+                    <li> <a href="LoginUser/RegisterUser"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+                    <li> <a href="LoginUser/Index"><span class="glyphicon glyphicon-log-in"></span> log in </a></li>
+                    <li> <a href="@Url.Action("LogOutUser","LoginUser")"> LogOut</a> </li>
+                    <li class="format-hello">
+                        @if (Session["NameUser"] == null)
+                        {
+                                <span> Hello</span>
+                        }
+                        else
+                        {
+                    <span> <text>Hello</text> @Session["NameUser"]</span>
+                         }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="container-fluid body-content">
+            <div class="row">
+                <div class="col-md-2">
+                    <ul style="text-decoration:none;background-color:greenyellow;margin-top:20px;list-style-type:none;padding:10px;">
+                        <li><a href="OrderDetail/GroupByTop5" style="color:white;" id="animation-top5"> Top 5 san pham  ban chay nhat</a></li>
+                    </ul>
+                    <ul style="list-style-type:none;">
+                        <li> <a href="/Product/SearchOption" class="btn btn-default" > Search theo gia</a></li>
+                    </ul>
+            @{Html.RenderAction("CategoryPartial", "Categories");}
+        </div>
+                <div class="col-md-10" id="div-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+      
+        <hr />
+        <footer id="div-footer">
+            
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DemoDB.Models.Product>
+
+@{
+    ViewBag.Title = "SearchOption";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top:100px"></div>
+@using (Html.BeginForm("SearchOption", "Product"))
+{
+    <text> Từ  </text><input type="number" name="Min" />
+    <text> Đến </text><input type="number" name="Max" />
+    <input type="submit" value="Search" />
+    <div class="container">
+        <div class=" row">
+            @foreach(var pro in Model)
+                {
+                    <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class=" card-pro">
+                            <p>@Html.DisplayFor(model=>pro.ProductID)</p>
+                            <img src="@Url.Content(pro.ImagePro)" height="150" width="150" />
+                            <p>@Html.DisplayFor(model=>pro.NamePro)</p>
+                            <p>@Html.DisplayFor(model=>pro.Price)</p>
+                            <a href="/ShopingCart/AddToCart/@pro.ProductID" class="btn btn-default">Buy</a>
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+}
+
